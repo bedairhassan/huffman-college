@@ -27,7 +27,9 @@ class BST {
 
     const searchTree = node => {
       // if frequency < node.frequency, go left
-      if (frequency < node.frequency) {
+      // original : if (frequency < node.frequency) {
+        // foul : if(frequency <= node.frequency) {
+       if (frequency <= node.frequency) {
         // if no left child, append new node
         if (!node.left) {
           node.left = newNode

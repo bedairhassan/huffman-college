@@ -3,7 +3,7 @@ import './App.css';
 
 export default function App() {
 
-  const [given, setGiven] = useState('ABCC')
+  const [given, setGiven] = useState('aasssdddd')
   const [unique, setUnique] = useState('')
   const [table, setTable] = useState([])
 

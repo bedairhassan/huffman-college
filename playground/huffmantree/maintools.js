@@ -35,8 +35,7 @@ function SortFrequencyHighestToLowest(tree){
 
 exports.GenerateTreeNodesMain = function (source, tree) {
 
-    // D C B A
-    source = SortLetterHighestToLowest(source)
+    source = SortFrequencyHighestToLowest(source)
 
     while (true) {
 
