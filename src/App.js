@@ -39,7 +39,7 @@ export default function App() {
 
     for (let i = 0; i < unique.length; i++) {
 
-      console.log('unique is ', unique[i])
+      // console.log('unique is ', unique[i])
       // table[i].frequency = find_occurences(unique,table[i])
       table[i] = {
         frequency: find_occurences(given, unique[i]),
@@ -100,48 +100,51 @@ export default function App() {
     </div>
   )
 
-  function renderBody(props) {
+  
 
-    return (
+  
+function renderHeader(props) {
 
-      <div>
+  return (
+
+    <div>
+      <thead>
         {
           props.map(item => {
 
             return (
 
-              <tr>
-                <td>{item.letter}</td>
-                <td>{item.frequency}</td>
-              </tr>
+
+              <th>{item}</th>
+
             )
           })
         }
+      </thead>
 
-      </div>
-    )
-  }
+    </div>
+  )
+}
 
-  function renderHeader(props) {
+function renderBody(props) {
 
-    return (
+  return (
 
-      <div>
-        <thead>
-          {
-            props.map(item => {
+    <div>
+      {
+        props.map(item => {
 
-              return (
+          return (
 
+            <tr>
+              <td>{item.letter}</td>
+              <td>{item.frequency}</td>
+            </tr>
+          )
+        })
+      }
 
-                <th>{item}</th>
-
-              )
-            })
-          }
-        </thead>
-
-      </div>
-    )
-  }
+    </div>
+  )
+}
 }
