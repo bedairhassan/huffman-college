@@ -5,77 +5,54 @@ export default function App() {
 
   const [given, setGiven] = useState('aasssdddd')
   const [unique, setUnique] = useState('')
-  const [table, setTable] = useState([])
+  const [table, setDisplayTable] = useState([]) // FOR DISPLAY // VISUALS
+  const [treeArray, setTreeArray] = useState([])
 
-  function find_occurences(str, char_to_count) {
-    return str.split(char_to_count).length - 1;
-  }
+  const [inOrderString, setinOrderString] = useState('')
 
-  const manipulateTextbox=()=>{
+  const manipulateTextbox = () => {
 
     // access to textbox !
-    document.getElementById("input").value= document.getElementById("input").value.trim()
+    document.getElementById("input").value = document.getElementById("input").value.trim()
   }
 
-  const handleSubmit = (e) => {
-    
-    let tmp=''
-    for (let i=0;i<e.target.value.length;i++){
+  const handleSubmit = () => {
 
-      if(e.target.value[i]===' '){
-        continue;
-      }
-
-      tmp = tmp.concat(e.target.value[i])
-    }
+    console.log(given)
 
     // setting !
-    setGiven(tmp)
-    setUnique(makeUnique(given))
-    manipulateTextbox()
+    setUnique(require('./huffmantree/stringtotable').makeUnique(given))
 
     // step 2 
-    let table = []
+    let stringToTable = require('./huffmantree/stringtotable').ToTable(given)
 
-    for (let i = 0; i < unique.length; i++) {
+    setTreeArray(require('./huffmantree/maintools').GenerateTreeNodesMain(stringToTable, []))
+    setDisplayTable(treeArray) // for display 
 
-      // console.log('unique is ', unique[i])
-      // table[i].frequency = find_occurences(unique,table[i])
-      table[i] = {
-        frequency: find_occurences(given, unique[i]),
-        letter: unique[i]
-      }
+    console.log('treeArray', treeArray)
+
+    // ISSUE/WARNING/ERROR - needs a promise
+    if (treeArray[0].frequency === undefined) {
+      return
     }
 
-    // sort from highest to lowest based on one attribute
-    table.sort(function compare(first,second){
+    var tree = require('./huffmantree/binary_search_tree_modified').Create_BST_Tree(treeArray)
+    console.log('tree is ', tree)
 
-      return second.frequency>first.frequency ? -1:0
-  }).reverse()
-
-    console.log(table)
-    setTable(table)
-
+    // setinOrderString(tree.dfsInOrder)
   }
 
   const ToggleCheckbox = (e) => {
     document.getElementById('input').disabled = !document.getElementById('input').disabled
   }
 
-  function makeUnique(str) {
-    return String.prototype.concat(...new Set(str))
-  }
-
   function handleReset() {
 
     setUnique('')
     setGiven(' ')
-    setTable([])
+    setDisplayTable([])
     document.getElementById('input').value = ''
   }
-
-
-
 
   return (
 
@@ -85,7 +62,12 @@ export default function App() {
       <button onClick={handleReset}>Reset</button>
 
       <h2>Enter your input</h2>
-      <input id="input" onChange={handleSubmit} id="input" placeholder="double space for submit"/>
+      <input id="input" id="input" onChange={(e) => {
+
+        manipulateTextbox()
+        setGiven(e.target.value)
+      }} placeholder="double space for submit" />
+      <button onClick={handleSubmit}>Click Submit Twice</button>
       <input type="checkbox" onClick={ToggleCheckbox} />lock<br />
 
       <h2>Unique Characters are '{unique}'</h2>
@@ -97,54 +79,56 @@ export default function App() {
         </tbody>
       </table>
 
+      <h1>InOrder {inOrderString}</h1>
+
     </div>
   )
 
-  
 
-  
-function renderHeader(props) {
 
-  return (
 
-    <div>
-      <thead>
+  function renderHeader(props) {
+
+    return (
+
+      <div>
+        <thead>
+          {
+            props.map(item => {
+
+              return (
+
+
+                <th>{item}</th>
+
+              )
+            })
+          }
+        </thead>
+
+      </div>
+    )
+  }
+
+  function renderBody(props) {
+
+    return (
+
+      <div>
         {
           props.map(item => {
 
             return (
 
-
-              <th>{item}</th>
-
+              <tr>
+                <td>{item.letter}</td>
+                <td>{item.frequency}</td>
+              </tr>
             )
           })
         }
-      </thead>
 
-    </div>
-  )
-}
-
-function renderBody(props) {
-
-  return (
-
-    <div>
-      {
-        props.map(item => {
-
-          return (
-
-            <tr>
-              <td>{item.letter}</td>
-              <td>{item.frequency}</td>
-            </tr>
-          )
-        })
-      }
-
-    </div>
-  )
-}
+      </div>
+    )
+  }
 }

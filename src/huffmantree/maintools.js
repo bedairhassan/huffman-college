@@ -37,10 +37,11 @@ exports.GenerateTreeNodesMain = function (source, tree) {
 
     source = SortFrequencyHighestToLowest(source)
 
+
     while (true) {
 
         // generate tree nodes gets called more than once ! 
-        q = require('./privatefunctions').GenerateTreeNodes(source) // parent 
+        var q = require('./privatefunctions').GenerateTreeNodes(source) // parent 
         source = q.source
         tree.push(q.tree) // method-sub-trees : pushing subtrees
 

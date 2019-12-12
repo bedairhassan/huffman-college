@@ -29,7 +29,7 @@ class BST {
       // if frequency < node.frequency, go left
       // original : if (frequency < node.frequency) {
         // foul : if(frequency <= node.frequency) {
-       if (frequency <= node.frequency) {
+       if (frequency <= node.frequency) { // hassan for future : add 
         // if no left child, append new node
         if (!node.left) {
           node.left = newNode

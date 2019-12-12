@@ -5,6 +5,8 @@ var table = [
     { 'letter': 'd', 'frequency': '4' }
 ]
 
+
+
 let tree_array = require('./maintools').GenerateTreeNodesMain(table, [])
 var tree = require('./binary_search_tree_modified').Create_BST_Tree(tree_array)
 // console.log(tree.size()) // KEEP: obviously, you can use BST functions -> no need to create static functions
