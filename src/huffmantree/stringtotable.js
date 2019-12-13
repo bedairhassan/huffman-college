@@ -1,7 +1,6 @@
 console.log('stringtotable')
 
 // string to table 
-var string = 'aaassssssdddd'
 
 var ToTable = (string)=>{
 
