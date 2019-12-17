@@ -1,5 +1,3 @@
-console.log('stringtotable')
-
 // string to table 
 
 var ToTable = (string)=>{
