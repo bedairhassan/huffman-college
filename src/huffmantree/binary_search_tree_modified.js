@@ -94,6 +94,23 @@ class BST {
     return false
   }
 
+  dfsInOrderNODES() {
+    let result = []
+
+    const traverse = node => {
+      // if left child exists, go left again
+      if (node.left) traverse(node.left)
+      // capture root node frequency
+      result.push(node)
+      // if right child exists, go right again
+      if (node.right) traverse(node.right)
+    }
+
+    traverse(this.root)
+
+    return result
+  }
+
   // depth first search - branch by branch
 
   // in-order
