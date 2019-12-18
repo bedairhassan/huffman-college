@@ -1,9 +1,11 @@
 // BINARY SEARCH TREE
+var codeg = ''
 
 class Node {
-  constructor(frequency,letter) {
+  constructor(frequency,letter,code) {
     this.frequency = frequency
     this.letter = letter
+    this.code=code
 
     this.left = null
     this.right = null
@@ -11,8 +13,8 @@ class Node {
 }
 
 class BST {
-  constructor(frequency,letter) {
-    this.root = new Node(frequency,letter)
+  constructor(frequency,letter,code) {
+    this.root = new Node(frequency,letter,code)
     this.count = 1
   }
 
@@ -20,39 +22,57 @@ class BST {
     return this.count
   }
 
-  insert(frequency,letter) {
+  insert(frequency,letter) { // user doesn't insert code, it gets generated
     this.count++
 
-    let newNode = new Node(frequency,letter)
+    //let newNode = new Node(frequency,letter,codeg)
+  const display=(codeg)=>{
+
+    return;
+    console.log('\n\n\ncodeg is ',codeg)
+    console.log('\n')
+  }
 
     const searchTree = node => {
       // if frequency < node.frequency, go left
       // original : if (frequency < node.frequency) {
         // foul : if(frequency <= node.frequency) {
        if (frequency <= node.frequency) { // hassan for future : add 
+        
+        codeg+='0'
+
         // if no left child, append new node
         if (!node.left) {
-          node.left = newNode
+          node.left =  new Node(frequency,letter,codeg)
+          display(codeg)
         } 
         // if left child, look left again
         else {
           searchTree(node.left)
+          display(codeg)
         }
       }
       // if frequency > node.frequency, go right
       else if (frequency > node.frequency) {
+
+        codeg+='1'
+
         // if no right child, append new node
         if (!node.right) {
-          node.right = newNode
+          node.right =  new Node(frequency,letter,codeg)
+          
+          display(codeg)
         }
         // if right child, look right again
         else {
           searchTree(node.right)
+          display(codeg)
         }
       }
     }
 
     searchTree(this.root)
+    codeg=''
   }
 
   min() {

@@ -18,7 +18,7 @@ export default function App() {
 
   const handleSubmit = () => {
 
-    console.log(given)
+    //console.log(given)
 
     // setting !
     setUnique(require('./huffmantree/stringtotable').makeUnique(given))
@@ -29,7 +29,7 @@ export default function App() {
     setTreeArray(require('./huffmantree/maintools').GenerateTreeNodesMain(stringToTable, []))
     setDisplayTable(treeArray) // for display 
 
-    console.log('treeArray', treeArray)
+    //console.log('treeArray', treeArray)
 
     // ISSUE/WARNING/ERROR - needs a promise
     if (treeArray[0].frequency === undefined) {
@@ -37,7 +37,7 @@ export default function App() {
     }
 
     var tree = require('./huffmantree/binary_search_tree_modified').Create_BST_Tree(treeArray)
-    console.log('tree is ', tree)
+    //console.log('tree is ', tree)
 
     // setinOrderString(tree.dfsInOrder)
   }

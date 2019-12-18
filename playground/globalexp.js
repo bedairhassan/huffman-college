@@ -6,9 +6,9 @@ var deduct = (stringarray)=>{
 
     stringarray.forEach(element=>{
         count--;
-        console.log(element)
+        //console.log(element)
     })
 }
 
 deduct(stringarray)
-console.log(count)
+//console.log(count)
