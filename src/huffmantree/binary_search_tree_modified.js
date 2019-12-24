@@ -2,10 +2,10 @@
 var codeg = ''
 
 class Node {
-  constructor(frequency,letter,code) {
+  constructor(frequency, letter, code) {
     this.frequency = frequency
     this.letter = letter
-    this.code=code
+    this.code = code
 
     this.left = null
     this.right = null
@@ -13,8 +13,8 @@ class Node {
 }
 
 class BST {
-  constructor(frequency,letter,code) {
-    this.root = new Node(frequency,letter,code)
+  constructor(frequency, letter, code) {
+    this.root = new Node(frequency, letter, code)
     this.count = 1
   }
 
@@ -22,30 +22,30 @@ class BST {
     return this.count
   }
 
-  insert(frequency,letter) { // user doesn't insert code, it gets generated
+  insert(frequency, letter) { // user doesn't insert code, it gets generated
     this.count++
 
     //let newNode = new Node(frequency,letter,codeg)
-  const display=(codeg)=>{
+    const display = (codeg) => {
 
-    return;
-    console.log('\n\n\ncodeg is ',codeg)
-    console.log('\n')
-  }
+      return;
+      console.log('\n\n\ncodeg is ', codeg)
+      console.log('\n')
+    }
 
     const searchTree = node => {
       // if frequency < node.frequency, go left
       // original : if (frequency < node.frequency) {
-        // foul : if(frequency <= node.frequency) {
-       if (frequency <= node.frequency) { // hassan for future : add 
-        
-        codeg+='0'
+      // foul : if(frequency <= node.frequency) {
+      if (frequency <= node.frequency) { // hassan for future : add 
+
+        codeg += '0'
 
         // if no left child, append new node
         if (!node.left) {
-          node.left =  new Node(frequency,letter,codeg)
+          node.left = new Node(frequency, letter, codeg)
           display(codeg)
-        } 
+        }
         // if left child, look left again
         else {
           searchTree(node.left)
@@ -55,12 +55,12 @@ class BST {
       // if frequency > node.frequency, go right
       else if (frequency > node.frequency) {
 
-        codeg+='1'
+        codeg += '1'
 
         // if no right child, append new node
         if (!node.right) {
-          node.right =  new Node(frequency,letter,codeg)
-          
+          node.right = new Node(frequency, letter, codeg)
+
           display(codeg)
         }
         // if right child, look right again
@@ -72,7 +72,7 @@ class BST {
     }
 
     searchTree(this.root)
-    codeg=''
+    codeg = ''
   }
 
   min() {
@@ -114,7 +114,29 @@ class BST {
     return false
   }
 
-  dfsInOrderNODES() {
+  dfsInOrderNodesToArray() {
+
+    let result = []
+
+    const traverse = node => {
+      // if left child exists, go left again
+      if (node.left) traverse(node.left)
+      // capture root node frequency
+      result.push({
+        frequency: node.frequency,
+        letter: node.letter,
+        code: node.code
+      })
+      // if right child exists, go right again
+      if (node.right) traverse(node.right)
+    }
+
+    traverse(this.root)
+
+    return result
+  }
+
+  dfsInOrderNODES() { // still tree !
     let result = []
 
     const traverse = node => {
@@ -163,14 +185,14 @@ class BST {
       // capture root node frequency
       result.push(node.frequency)
       // if left child exists, go left again
-      if (node.left) traverse(node.left)      
+      if (node.left) traverse(node.left)
       // if right child exists, go right again
       if (node.right) traverse(node.right)
     }
 
     traverse(this.root)
 
-    return result    
+    return result
   }
 
   // post-order
@@ -181,7 +203,7 @@ class BST {
 
     const traverse = node => {
       // if left child exists, go left again
-      if (node.left) traverse(node.left)      
+      if (node.left) traverse(node.left)
       // if right child exists, go right again
       if (node.right) traverse(node.right)
       // capture root node frequency
@@ -190,7 +212,7 @@ class BST {
 
     traverse(this.root)
 
-    return result   
+    return result
   }
 
   // breadth first search - level by level
@@ -203,7 +225,7 @@ class BST {
 
     queue.push(this.root)
 
-    while(queue.length) {
+    while (queue.length) {
       let currentNode = queue.shift()
 
       result.push(currentNode.frequency)
@@ -220,9 +242,9 @@ class BST {
   }
 }
 
-const Create_BST_Tree = (array)=>{
+const Create_BST_Tree = (array) => {
 
-  var bst = new BST(array[0].frequency,array[0].letter)
+  var bst = new BST(array[0].frequency, array[0].letter)
 
   // 0 1 2 : length is 3 : reaches index 2 
   // 0 : new BST()
@@ -230,12 +252,12 @@ const Create_BST_Tree = (array)=>{
   // 2 : insert()
   // start from 1 
 
-  for (let i=1;i<array.length;i++){
+  for (let i = 1; i < array.length; i++) {
 
-    bst.insert(array[i].frequency,array[i].letter)
+    bst.insert(array[i].frequency, array[i].letter)
   }
 
-  return bst; 
+  return bst;
 }
 
 exports.Create_BST_Tree = Create_BST_Tree

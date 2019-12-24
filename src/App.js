@@ -1,133 +1,66 @@
 import React, { useState } from 'react';
 import './App.css';
+import Table from './pages/Table'
 
-export default function App() {
+export default class App extends React.Component {
 
-  const [given, setGiven] = useState('aasssdddd')
-  const [unique, setUnique] = useState('')
-  const [table, setDisplayTable] = useState([]) // FOR DISPLAY // VISUALS
-  const [treeArray, setTreeArray] = useState([])
+  constructor(props) {
 
-  const [inOrderString, setinOrderString] = useState('')
+    super(props)
 
-  const manipulateTextbox = () => {
+    this.state = {
 
-    // access to textbox !
-    document.getElementById("input").value = document.getElementById("input").value.trim()
+      raw: [
+        { frequency: 3, letter: 'a', code: '00' },
+        { frequency: 4, letter: 'd', code: '0' },
+        { frequency: 6, letter: 's', code: undefined },
+        { frequency: 7, letter: 'da', code: '1' },
+        { frequency: 13, letter: 'sda', code: '11' }
+      ],
+      user: [{ frequency: 'null frequency', letter: 'null letter', code: 'null code' }],
+      userstring: ''
+    }
   }
 
-  const handleSubmit = () => {
+  submit() {
 
-    //console.log(given)
+    console.log('loading main.js')
 
-    // setting !
-    setUnique(require('./huffmantree/stringtotable').makeUnique(given)).then(function(){
-      alert('given is ',given)
-    })
 
-    // step 2 
-    let stringToTable = require('./huffmantree/stringtotable').ToTable(given)
 
-    setTreeArray(require('./huffmantree/maintools').GenerateTreeNodesMain(stringToTable, []))
-    setDisplayTable(treeArray) // for display 
-
-    //console.log('treeArray', treeArray)
-
-    // ISSUE/WARNING/ERROR - needs a promise
-    // if (treeArray[0].frequency === undefined) {
-    //   return
-    // }
-
-    var tree = require('./huffmantree/binary_search_tree_modified').Create_BST_Tree(treeArray)
-    //console.log('tree is ', tree)
-
-    // setinOrderString(tree.dfsInOrder)
+    this.api_table();
   }
 
-  const ToggleCheckbox = (e) => {
-    document.getElementById('input').disabled = !document.getElementById('input').disabled
+  api_table() {
+
   }
 
-  function handleReset() {
-
-    setUnique('')
-    setGiven(' ')
-    setDisplayTable([])
-    document.getElementById('input').value = ''
-  }
-
-  return (
-
-    <div className="center">
-      <h1>Huffman</h1>
-
-      <button onClick={handleReset}>Reset</button>
-
-      <h2>Enter your input</h2>
-      <input id="input" id="input" onChange={(e) => {
-
-        manipulateTextbox()
-        setGiven(e.target.value)
-      }} placeholder="double space for submit" />
-      <button onClick={handleSubmit}>Click Submit Twice</button>
-      <input type="checkbox" onClick={ToggleCheckbox} />lock<br />
-
-      <h2>Unique Characters are '{unique}'</h2>
-
-      <table>
-        {renderHeader(['letter', 'frequency'])}
-        <tbody>
-          {renderBody(table)}
-        </tbody>
-      </table>
-
-      <h1>InOrder {inOrderString}</h1>
-
-    </div>
-  )
-
-  function renderHeader(props) {
+  render() {
 
     return (
 
-      <div>
-        <thead>
-          {
-            props.map(item => {
+      <center>
+        <div>
+          <center><h1>Huffman Tree</h1></center>
 
-              return (
+          <h2>Enter your string</h2>
+          <input onChange={(e) => { this.setState({ userstring: e.target.value }) }} />
 
+          <button onClick={() => { this.submit() }}>Submit</button>
 
-                <th>{item}</th>
-
-              )
-            })
-          }
-        </thead>
-
-      </div>
-    )
-  }
-
-  function renderBody(props) {
-
-    return (
-
-      <div>
-        {
-          props.map(item => {
-
-            return (
-
-              <tr>
-                <td>{item.letter}</td>
-                <td>{item.frequency}</td>
-              </tr>
-            )
-          })
-        }
-
-      </div>
+          <Table data={this.state.user} />
+        </div>
+      </center>
     )
   }
 }
+
+// let promise = new Promise(function(resolve,reject){
+
+//   resolve('hello world')
+// })
+
+// promise.then(function(value){
+
+//   alert(value)
+// })
