@@ -6,8 +6,6 @@ var table = require('./table').table
 
 let decompress_this = (table,string)=>{
 
-    
-
     let str =[]
     let decompressed = []
 
@@ -39,7 +37,12 @@ let decompress_this = (table,string)=>{
     return decompressed
 }
 
-let str = '10 110 10 010'
+let main =()=>{
+
+    let str = '10 110 10 010'
 str = require('./playground/removewhitespace').removewhitespace(str)
 let decompressed = decompress_this(table,str)
 console.log('decompressed: ',decompressed)
+}
+
+main()

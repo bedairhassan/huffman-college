@@ -14,6 +14,7 @@ function SortLetterHighestToLowest(source){
 }
 
  
+// tree_array needed to be improved. 
 function ModifyTree (tree){
 
 tree = require('./privatefunctions').flatCondition(tree) // many arrays in one array to one entire array 
@@ -37,7 +38,6 @@ exports.GenerateTreeNodesMain = function (source, tree) {
 
     source = SortFrequencyHighestToLowest(source)
 
-
     while (true) {
 
         // generate tree nodes gets called more than once ! 
@@ -51,7 +51,7 @@ exports.GenerateTreeNodesMain = function (source, tree) {
     }
 
     tree = ModifyTree(tree) // method-sub-trees : getting rid of subtrees
-    tree = SortFrequencyHighestToLowest(tree)
+    
 
     // ACTUAL TREE ! ! ! ! !! ! 
     // tree = require('./binary_search_tree_modified').Create_BST_Tree(tree)

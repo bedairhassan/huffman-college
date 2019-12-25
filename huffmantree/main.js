@@ -64,11 +64,15 @@ const tree_array_generate = (USER_STRING) => {
 }
 
 
-// YOUR CODE - main :) - 3 lines - commented them due to redundancy of function calls 
-//let USER_STRING = 'aaassssssdddasdqwdqwdwqdqwdqwdQd'
-//let q = tree_array_generate(USER_STRING) // has 2 attributes : tree_array,tree
-//console.log(q.tree_array)
+let main =()=>{
+    // YOUR CODE - main :) - 3 lines - commented them due to redundancy of function calls 
+let USER_STRING = 'aqss'
+let q = tree_array_generate(USER_STRING) // has 2 attributes : tree_array,tree
+console.log(q.tree_array)
 // console.log(q.tree)
+}
+
+main()
 
 exports.tree_array_generate= tree_array_generate
 
